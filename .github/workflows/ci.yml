@@ -1,0 +1,28 @@
+name: continuous-integration
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  check-conventional-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: ohpensource/platform-cicd/actions/git/ensure-conventional-commits@2.16.0.0
+        name: Ensure conventional commits
+        with:
+          base-branch: $GITHUB_BASE_REF
+          pr-branch: $GITHUB_HEAD_REF
+          
+  check-jira-tickets-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: ohpensource/platform-cicd/actions/git/ensure-commits-message-jira-ticket@2.16.0.0
+        name: Ensure Jira ticket in all commits
+        with:
+          base-branch: $GITHUB_BASE_REF
+          pr-branch: $GITHUB_HEAD_REF

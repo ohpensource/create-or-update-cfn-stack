@@ -1,0 +1,25 @@
+name: continuous-delivery
+on:
+  push:
+    branches: [main]
+jobs:
+  continuous-delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CICD_GITHUB_REPOSITORY_TOKEN }}
+      - uses: ohpensource/platform-cicd/actions/git/generate-version-and-release-notes@2.16.0.0
+        name: semver & changelog
+        with:
+          user-email: "github-svc@ohpen.com"
+          user-name: "GitHub Actions"
+      - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
+        uses: terraform-docs/gh-actions@v0.11.0
+        with:
+          find-dir: terraform/
+          git-commit-message: "[tfm-docs][skip ci] - updating terraform docs"
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
