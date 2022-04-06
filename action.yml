@@ -1,4 +1,4 @@
-name: "create-or-update-stack"
+name: "create-or-update-cfn-stack"
 description: "creates (or updates) an stack based on cfn inputs"
 inputs:
   region:
