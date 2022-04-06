@@ -40,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
        - name: create-or-update-stack
-        uses: ohpensource/create-or-update-cfn-stack-gh-action/create-or-update-cfn-stack@v0.0.2
+        uses: ohpensource/create-or-update-cfn-stack-gh-action@v0.0.2
         with:
           region: ${{ secrets.AWS_REGION }}
           access-key: ${{ secrets.AWS_ACCESS_KEY_ID }}
