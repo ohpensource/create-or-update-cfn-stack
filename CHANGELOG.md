@@ -1,3 +1,9 @@
+# :confetti_ball: 1.0.0 (2022-04-21T12:55:44.149Z)
+- - -
+## :boom: BREAKING CHANGES
+* LANZ-2299 introduce tags as mandatory inputs (#8)
+- - -
+- - -
 # :confetti_ball: 0.0.7 (2022-04-06T09:38:49.100Z)
 - - -
 ## :newspaper: Others
