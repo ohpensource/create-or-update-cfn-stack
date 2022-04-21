@@ -16,11 +16,3 @@ jobs:
           user-email: "github-svc@ohpen.com"
           user-name: "GitHub Actions"
           version-prefix: "v"
-      - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
-        uses: terraform-docs/gh-actions@v0.11.0
-        with:
-          find-dir: terraform/
-          git-commit-message: "[tfm-docs][skip ci] - updating terraform docs"
-          output-file: README.md
-          output-method: inject
-          git-push: "true"

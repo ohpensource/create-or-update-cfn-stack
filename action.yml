@@ -1,0 +1,69 @@
+name: "create-or-update-cfn-stack"
+description: "creates (or updates) an stack based on cfn inputs"
+inputs:
+  region:
+    description: "aws region name"
+    required: true
+  access-key:
+    description: "access key"
+    required: true
+  secret-key:
+    description: "secret key"
+    required: true
+  account:
+    description: "aws account id"
+    required: true
+  role-name:
+    description: "role to assume"
+    required: true
+  stack-name:
+    description: "name of the stack to update"
+    required: true
+  template-body-path:
+    description: "path where the cloudformation template file is located"
+    required: true
+  cfn-parameters-path:
+    description: "path where the cloudformation inputs are located"
+    required: true
+  stage: 
+    description: "DTAP environment (dev, tst, ...)"
+    required: true
+  repository-url: 
+    description: "url of the repository holding the IaC"
+    required: true
+  client: 
+    description: "Customer name"
+    required: true
+  service: 
+    description: "Name of the service owning this deployment"
+    required: true
+  service-group: 
+    description: "group name that isolates stack infrastructure"
+    required: true
+  team: 
+    description: "Name of the team owning the service"
+    required: true
+  datadog: 
+    description: "Either true or false. If true, DataDog will pull metrics from resources."
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        ${{ github.action_path }}/create-or-update-stack.sh \
+          -a "${{ inputs.region }}" \
+          -b "${{ inputs.access-key }}" \
+          -c "${{ inputs.secret-key }}" \
+          -d "${{ inputs.account }}" \
+          -e "${{ inputs.role-name }}" \
+          -f "${{ inputs.stack-name }}" \
+          -g "${{ inputs.template-body-path }}" \
+          -h "${{ inputs.cfn-parameters-path }}" \
+          -i "${{ inputs.stage }}" \
+          -j "${{ inputs.repository-url }}" \
+          -k "${{ inputs.client }}" \
+          -l "${{ inputs.service }}" \
+          -m "${{ inputs.service-group }}" \
+          -n "${{ inputs.team }}" \
+          -o "${{ inputs.datadog }}"
+      shell: bash
